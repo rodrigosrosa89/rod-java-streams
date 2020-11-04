@@ -2,6 +2,7 @@ package br.com.rod.java.streams;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.BinaryOperator;
 import java.util.function.Consumer;
 import java.util.function.Function;
 
@@ -60,6 +61,13 @@ public class Main {
 		// Com método apply() é possível invocar a ação da FUNCTION, incluindo um objeto para utilização
 		double novoSalario = function.apply(new Empregado(10, "Rodrigo Rosa", 7, "Java"));
 		System.out.println(novoSalario);
+		
+		//BinaryOperator
+		System.out.println("Execução do BinaryOperator:");
+		BinaryOperator<Empregado> binaryOperator = (emp1,emp2) ->
+		new Empregado(-1, emp1.getNome(), emp1.getSalario() + emp2.getSalario(), "Junção");
+		Empregado novoEmpregado = binaryOperator.apply(new Empregado(0, "Rod", 2000, ""), new Empregado(0, "Soma", 3000, ""));
+		System.out.println(novoEmpregado.getNome() + ", R$ " + novoEmpregado.getSalario());
 	}
 
 }
