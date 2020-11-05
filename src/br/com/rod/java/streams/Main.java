@@ -2,9 +2,12 @@ package br.com.rod.java.streams;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.function.BinaryOperator;
 import java.util.function.Consumer;
 import java.util.function.Function;
+import java.util.function.Predicate;
+import java.util.function.Supplier;
 
 public class Main {
 
@@ -68,6 +71,21 @@ public class Main {
 		new Empregado(-1, emp1.getNome(), emp1.getSalario() + emp2.getSalario(), "Junção");
 		Empregado novoEmpregado = binaryOperator.apply(new Empregado(0, "Rod", 2000, ""), new Empregado(0, "Soma", 3000, ""));
 		System.out.println(novoEmpregado.getNome() + ", R$ " + novoEmpregado.getSalario());
+		
+		//Predicate 
+		System.out.println("Execução do Predicate:");
+		Predicate<Empregado> predicate = (emp) -> emp.getNome().endsWith("Web");
+		boolean terminaComWeb = predicate.test(new Empregado(10, "RodrigoWeb", 1, ""));
+		System.out.println(terminaComWeb);
+		
+		// Supplier
+		System.out.println("Execução do Supplier:");
+		Supplier<Empregado> supplier = () -> new Empregado(new Random().nextInt(), "SupplierEmp", 1, "Java");
+		Empregado emp1 = supplier.get();
+		System.out.println(emp1.getId());
+		Empregado emp2 = supplier.get();
+		System.out.println(emp2.getId());
+
 	}
 
 }
